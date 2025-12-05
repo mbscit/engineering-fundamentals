@@ -38,7 +38,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: execute the unit test
-        run: npm test
+        run: npm install && npm test
 
   publish-docker-image:
     needs: test
