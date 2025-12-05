@@ -54,7 +54,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Log in to Azure Container Registry
-        uses: docker/login-action@v4
+        uses: docker/login-action@v3.6
         with:
           registry: crmbn.azurecr.io
           username: marc.bruni@ipt.ch
@@ -103,18 +103,7 @@ jobs:
 
       - name: Build the Docker image
         run: |
-          docker build -t crmbn.azurecr.io/ipt-spins:${{ steps.versioning.outputs.full_tag }} -t crmbn.azurecr.io/ipt-spins:latest .
+          docker build -t lrengineering.azurecr.io/ipt-spins:${{ steps.versioning.outputs.full_tag }} -t lrengineering.azurecr.io/ipt-spins:latest .
 
       - name: Push the Docker image to ACR
-        run: |
-          set -euo pipefail
-          echo "TASK B.3 - Push the docker images to the ACR"
-
-          IMAGE_BASE="crmbn.azurecr.io/ipt-spins"
-          VERSION_TAG="${{ steps.versioning.outputs.full_tag }}"
-
-          echo "Pushing ${IMAGE_BASE}:${VERSION_TAG}"
-          docker push "${IMAGE_BASE}:${VERSION_TAG}"
-
-          echo "Pushing ${IMAGE_BASE}:latest"
-          docker push "${IMAGE_BASE}:latest"
+        run: echo "** TASK B.3 - Push the docker images to the ACR **"
