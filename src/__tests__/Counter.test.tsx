@@ -1,7 +1,14 @@
-import { render} from "@testing-library/react";
+import { render, screen, act, fireEvent } from "@testing-library/react";
 import Counter from "../Counter";
 
-test("increments count when button is clicked", () => {
+test("increments count when button is clicked", async () => {
+    // Arrange
     render(<Counter />);
-    // Add the test logic below
+    var button = await screen.findByText("count is 0");
+
+    // Act
+    fireEvent.click(button);
+
+    // Assert
+    expect(button.textContent).toBe("count is 1");
 });
